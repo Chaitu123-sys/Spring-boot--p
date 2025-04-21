@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring MVC Project</title>
+</head>
+<body>
+ <div class="container mt-4">
+        <h1 class="mb-4">Employee Directory</h1>
+
+        <a th:href="@{/showFormForAdd}" class="btn btn-primary mb-3">Add Employee</a>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="emp : ${employees}">
+                    <td th:text="${emp.firstname}"></td>
+                    <td th:text="${emp.lastname}"></td>
+                    <td th:text="${emp.email}"></td>
+                    <td>
+                        <a th:href="@{/showFormForUpdate(employeeId=${emp.id})}" 
+                           class="btn btn-info btn-sm">Update</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a th:href="@{/delete(employeeId=${emp.id})}" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Are you sure you want to delete this employee?')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
